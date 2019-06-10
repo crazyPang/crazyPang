@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="Crazytwo Pang">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="cocos creator 自封自用的方法">
+  <meta property="og:description" content="这个人很懒，懒得说了...">
+  <meta property="og:site_name" content="Panny Pang">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://crazytwo.github.io">
+  
+    <link rel="alternate" href="/atom.xml" title="Panny Pang" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Panny Pang</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-2.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">cocos creator 自封自用的方法</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/crazytwo">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:809706413@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Crazytwo Pang</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-06-10</span>
+            <span class="time">17:28:19</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>以下是我自己开发过程中自己封装的一些方法系列，用以便捷开发，算不上是什么很精辟的，乱七八糟的各种…</p>
+<!-- ## Quick Start -->
+<h3 id="开启弹框-收起弹框（收缩形式）"><a href="#开启弹框-收起弹框（收缩形式）" class="headerlink" title="开启弹框/收起弹框（收缩形式）"></a>开启弹框/收起弹框（收缩形式）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 开启弹框/收起弹框 动画</span><br><span class="line">* @param &#123;Node/String-nodeUrl&#125; node 节点</span><br><span class="line">* @param &#123;String&#125; <span class="built_in">type</span> <span class="string">'on'</span>/<span class="string">'off'</span> 开启弹框/收起弹框</span><br><span class="line">* @param &#123;boolean&#125; notCloseBg  Canvas/blackSpN 背景显示状态</span><br><span class="line">* 弹框动画 demo：this.displayNode(cc.find(<span class="string">'Canvas'</span>),<span class="string">'on'</span>);</span><br><span class="line">*           or  this.displayNode(<span class="string">'Canvas'</span>,<span class="string">'off'</span>);</span><br><span class="line">*/</span><br><span class="line">displayNode(node, <span class="built_in">type</span>, notCloseBg) &#123;</span><br><span class="line">    node = (typeof node == <span class="string">'string'</span>) &amp;&amp; node.constructor == String ? cc.find(node) : node;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">type</span> == <span class="string">'on'</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (node.scaleX == 0 || !node.active) &#123;</span><br><span class="line">            <span class="keyword">if</span> (node.getChildByName(<span class="string">'kuang'</span>)) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="built_in">let</span> index = 0; index &lt; node.getChildByName(<span class="string">'kuang'</span>).children.length; index++) &#123;</span><br><span class="line">                    const element = node.getChildByName(<span class="string">'kuang'</span>).children[index];</span><br><span class="line">                    element.active = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            node.scaleX = 0;</span><br><span class="line">            node.scaleY = 0;</span><br><span class="line">            node.stopAllActions();</span><br><span class="line">            node.active = <span class="literal">true</span>;</span><br><span class="line">            node.runAction(cc.sequence(cc.scaleTo(0.2, 1, 1), cc.scaleTo(0.01, 1, 1), cc.callFunc(<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">                <span class="keyword">if</span> (node.getChildByName(<span class="string">'kuang'</span>)) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="built_in">let</span> index = 0; index &lt; node.getChildByName(<span class="string">'kuang'</span>).children.length; index++) &#123;</span><br><span class="line">                        const element = node.getChildByName(<span class="string">'kuang'</span>).children[index];</span><br><span class="line">                        element.active = <span class="literal">true</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)));</span><br><span class="line">            node.showed = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        node.stopAllActions();</span><br><span class="line">        node.runAction(cc.sequence(cc.scaleTo(0.2, 0, 0), cc.scaleTo(0.01, 0, 0), cc.callFunc(<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">            node.active = <span class="literal">false</span>;</span><br><span class="line">        &#125;)));</span><br><span class="line">        node.showed = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (cc.find(<span class="string">'Canvas/blackSpN'</span>)) cc.find(<span class="string">'Canvas/blackSpN'</span>).active = <span class="built_in">type</span> == <span class="string">'on'</span> || notCloseBg;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h3 id="技能cd效果"><a href="#技能cd效果" class="headerlink" title="技能cd效果"></a>技能cd效果</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 进度 技能<span class="built_in">cd</span>效果</span><br><span class="line">* @param 对象</span><br><span class="line">* @param 圆心 x 轴位置</span><br><span class="line">* @param 圆心 y 轴位置</span><br><span class="line">* @param 圆半径</span><br><span class="line">* @param 比例</span><br><span class="line">* @param []可变颜色</span><br><span class="line">* @param 透明度</span><br><span class="line">* @param 是否逆时针</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">loadArc: <span class="keyword">function</span>(ctx, cx, cy, radius, progress, colors, opacity,flag=flase) &#123;</span><br><span class="line">    ctx = ctx.getComponent(cc.Graphics) || ctx.addComponent(cc.Graphics);</span><br><span class="line">    ctx &amp;&amp; !ctx.clear() &amp;&amp; ctx.unscheduleAllCallbacks();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> drawArc(s, e) &#123;</span><br><span class="line">        ctx.clear();</span><br><span class="line">        ctx.arc(cx, cy, radius, s, e, flag); //画弧度arc </span><br><span class="line">        ctx.lineTo(cx, cy);</span><br><span class="line">        <span class="keyword">if</span> (colors) &#123;</span><br><span class="line">            var len = colors.length;</span><br><span class="line">            <span class="keyword">for</span> (var i = 0; i &lt; len; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (s &lt;= 1 / 2 * Math.PI - i / len * 2 * Math.PI) &#123;</span><br><span class="line">                    ctx.fillColor = colors[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ctx.fillColor = cc.Color.GREEN;</span><br><span class="line">        &#125;</span><br><span class="line">        ctx.fillColor.a = opacity || 255;</span><br><span class="line">        ctx.fill(); //填充画的图画</span><br><span class="line">    &#125;</span><br><span class="line">    var step = progress, //记录当前步</span><br><span class="line">        n = 1, //结束步数</span><br><span class="line">        startAngle = 0, //开始角度  90度值</span><br><span class="line">        endAngle = 1 / 2 * Math.PI; //结束角度  90度值</span><br><span class="line">    startAngle = 1 / 2 * Math.PI - step / n * 2 * Math.PI; //初始角度 - 当前步／总步数 * 圆的角度值   ----   Math.PI为半圆的角度</span><br><span class="line">    drawArc(startAngle, endAngle);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取链接地址（适用于web）"><a href="#获取链接地址（适用于web）" class="headerlink" title="获取链接地址（适用于web）"></a>获取链接地址（适用于web）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//工具方法：获取链接地址</span><br><span class="line"><span class="function"><span class="title">getRequestUrl</span></span>() &#123;</span><br><span class="line">    var searchStr = decodeURI(window.location.search); //获取url<span class="string">'?'</span>符号(包含)后的字符串</span><br><span class="line">    var params = &#123;&#125;;</span><br><span class="line">    <span class="keyword">if</span> (searchStr.indexOf(<span class="string">'?'</span>) != -1) &#123; //以<span class="string">'?'</span>开头</span><br><span class="line">        var strs = searchStr.substr(1).split(<span class="string">'&amp;'</span>); //截取第1位(不包含)后的字符串,将字符串以<span class="string">'&amp;'</span>符号分割成数组</span><br><span class="line">        <span class="keyword">for</span> (var i = 0; i &lt; strs.length; i++) &#123; params[strs[i].split(<span class="string">'='</span>)[0]] = unescape(strs[i].split(<span class="string">'='</span>)[1]); &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> params;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h3 id="倒计时格式化"><a href="#倒计时格式化" class="headerlink" title="倒计时格式化"></a>倒计时格式化</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">//工具方法：倒计时格式化 01:10:01 || 10:01 || 00:01</span><br><span class="line">secondToTime(time) &#123;</span><br><span class="line">    var secondTime = parseInt(time); // 秒</span><br><span class="line">    var minuteTime = 0; // 分</span><br><span class="line">    var hourTime = 0; // 小时</span><br><span class="line">    <span class="keyword">if</span> (secondTime &gt; 60) &#123; //如果秒数大于60，将秒数转换成整数</span><br><span class="line">        //获取分钟，除以60取整数，得到整数分钟</span><br><span class="line">        minuteTime = parseInt(secondTime / 60);</span><br><span class="line">        //获取秒数，秒数取佘，得到整数秒数</span><br><span class="line">        secondTime = parseInt(secondTime % 60);</span><br><span class="line">        //如果分钟大于60，将分钟转换成小时</span><br><span class="line">        <span class="keyword">if</span> (minuteTime &gt; 60) &#123;</span><br><span class="line">            //获取小时，获取分钟除以60，得到整数小时</span><br><span class="line">            hourTime = parseInt(minuteTime / 60);</span><br><span class="line">            //获取小时后取佘的分，获取分钟除以60取佘的分</span><br><span class="line">            minuteTime = parseInt(minuteTime % 60);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    var result = <span class="string">''</span> + ((secondTime + <span class="string">''</span>).length &lt; 2 ? <span class="string">'0'</span> + (secondTime + <span class="string">''</span>) : (secondTime + <span class="string">''</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (minuteTime &gt; 0) &#123;</span><br><span class="line">        result = <span class="string">''</span> + ((minuteTime + <span class="string">''</span>).length &lt; 2 ? <span class="string">'0'</span> + (minuteTime + <span class="string">''</span>) : (minuteTime + <span class="string">''</span>)) + <span class="string">':'</span> + result;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        result = <span class="string">'00:'</span> + result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (hourTime &gt; 0) &#123;</span><br><span class="line">        result = <span class="string">''</span> + ((hourTime + <span class="string">''</span>).length &lt; 2 ? <span class="string">'0'</span> + (hourTime + <span class="string">''</span>) : (hourTime + <span class="string">''</span>)) + <span class="string">':'</span> + result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> result;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h3 id="日期格式化"><a href="#日期格式化" class="headerlink" title="日期格式化"></a>日期格式化</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//工具方法：日期格式化 yyyy-mm-dd</span><br><span class="line">formatDate(date) &#123;</span><br><span class="line">    var myyear = date.getFullYear();</span><br><span class="line">    var mymonth = date.getMonth() + 1;</span><br><span class="line">    var myweekday = date.getDate();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (mymonth &lt; 10) &#123;</span><br><span class="line">        mymonth = <span class="string">'0'</span> + mymonth;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (myweekday &lt; 10) &#123;</span><br><span class="line">        myweekday = <span class="string">'0'</span> + myweekday;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> (myyear + <span class="string">'/'</span> + mymonth + <span class="string">'/'</span> + myweekday);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组的处理"><a href="#数组的处理" class="headerlink" title="数组的处理"></a>数组的处理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">//工具方法：数组的处理</span><br><span class="line">//删除数组元素</span><br><span class="line">Array.prototype.indexOf = <span class="keyword">function</span>(val) &#123;</span><br><span class="line">    <span class="keyword">for</span> (var i = 0; i &lt; this.length; i++) &#123; <span class="keyword">if</span> (this[i] == val) <span class="built_in">return</span> i; &#125;</span><br><span class="line">    <span class="built_in">return</span> -1;</span><br><span class="line">&#125;;</span><br><span class="line">Array.prototype.remove = <span class="keyword">function</span>(val) &#123;</span><br><span class="line">    var index = this.indexOf(val);</span><br><span class="line">    <span class="keyword">if</span> (index &gt; -1) &#123; this.splice(index, 1); &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* 从数组里筛选数据   返回结果为数组</span><br><span class="line">* arr：比较的数组</span><br><span class="line">* <span class="built_in">type</span>  <span class="literal">true</span>：返回比较的数组和原数组的交集  <span class="literal">false</span>  返回比较的数组和原数组的差集</span><br><span class="line">*/</span><br><span class="line">Array.prototype.getArrDifference = <span class="keyword">function</span>(arr, <span class="built_in">type</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">type</span>) &#123;</span><br><span class="line">        <span class="built_in">return</span> this.concat(arr).filter(<span class="keyword">function</span>(v, i, arr) &#123; <span class="built_in">return</span> arr.indexOf(v) !== arr.lastIndexOf(v); &#125;).filter(<span class="keyword">function</span>(element, index, self) &#123; <span class="built_in">return</span> self.indexOf(element) === index; &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">return</span> this.concat(arr).filter(<span class="keyword">function</span>(v, i, arr) &#123; <span class="built_in">return</span> arr.indexOf(v) === arr.lastIndexOf(v); &#125;).filter(<span class="keyword">function</span>(element, index, self) &#123; <span class="built_in">return</span> self.indexOf(element) === index; &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        </p><p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
